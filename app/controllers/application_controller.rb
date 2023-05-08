@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-
-  http_basic_authenticate_with name: 'Jungle', password: 'book'
   
   def cart
     @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
