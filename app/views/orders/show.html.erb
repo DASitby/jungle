@@ -10,8 +10,8 @@
 
   <%= render 'orders/line_items' %>
 
-  <h3>Total: $<%= (@order.total_cents / 100).to_f %> <h3>
-  <h3>Email: <%= @order.email %>
+  <h3>Total: $<%= (@order.total_cents / 100).to_f %> </h3>
+  <h3>Email: <%= @order.email %> </h3>
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
