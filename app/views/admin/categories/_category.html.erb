@@ -3,6 +3,6 @@
     <h4><%= category.name %></h4>
   </td>
   <td>
-    <%= Product.where(category_id = category_id).count %>
+    <%= Product.where(category: category).count %>
   </td>
 </tr>
