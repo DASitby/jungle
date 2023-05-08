@@ -1,8 +1,22 @@
-<div class="panel panel-default items">
-    <h1> Is this even working? </h1>
-    <% LineItem.where(order_id: @order_id).each do |item| %>
-      <% render item %>
-      <% product = Product.find(item.product_id) %>
-      <%= render 'item', product: product %>
-    <% end %>
-  </div>
+<div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+    <tbody>
+   <% for item in @order.line_items do %>
+    <% product = Product.find(item.product_id) %>
+    <td><%= image_tag product.image.tiny.url %></td>
+    <td><%= product.name %></td>
+    <td>$<%= product.price_cents / 100.to_f%></td>
+    <td><%= item.quantity %> </td>
+    <td>$<%= item.total_price_cents / 100.to_f%></td>
+    </tbody>
+  <% end %>
+  </table>
+</div>
