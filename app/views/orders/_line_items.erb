@@ -1,0 +1,8 @@
+<div class="panel panel-default items">
+    <h1> Is this even working? </h1>
+    <% LineItem.where(order_id: @order_id).each do |item| %>
+      <% render item %>
+      <% product = Product.find(item.product_id) %>
+      <%= render 'item', product: product %>
+    <% end %>
+  </div>
