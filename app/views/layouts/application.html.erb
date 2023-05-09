@@ -10,6 +10,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if notice %>
+    <%= notice %>
+  <% end %>
+  <% if alert %>
+    <%= alert %>
+  <% end %>
 
   <%= render 'layouts/top_nav' %>
 
