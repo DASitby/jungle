@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
-
+  resources :login, path 'sessions',  only: [:new, :create]
+  resources :logout path 'sessions', only: [:destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
