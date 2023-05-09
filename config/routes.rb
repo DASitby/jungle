@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'pages/secret'
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy], via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
