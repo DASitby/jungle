@@ -24,5 +24,10 @@ RSpec.describe Product, type: :model do
       expect(product).not_to be_valid
       expect(product.errors[:category]).to include("can't be blank")
     end
+    it 'saves the product with all attributes filled in correctly' do
+      product = Product.new(name: 'Example Product', price: 9.99, quantity: 10, category: category)
+      expect(product).to be_valid
+      expect { product.save }.to change { Product.count }.by(1)
+    end
   end
 end
