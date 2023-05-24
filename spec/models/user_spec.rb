@@ -42,4 +42,41 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password]).to include("is too short (minimum is 8 characters)")
     end
   end
+
+  describe '.authenticate_with_credentials' do
+    it 'returns the user if authenticated successfully' do
+      User.create(first_name:"David", last_name: "Sooley", email: 'test@example.com', password: 'password', password_confirmation: 'password')
+
+      authenticated_user = User.authenticate_with_credentials('test@example.com', 'password')
+      expect(authenticated_user).to be_a(User)
+    end
+
+    it 'returns nil if authentication fails (incorrect password)' do
+      User.create(first_name:"David", last_name: "Sooley", email: 'test@example.com', password: 'password', password_confirmation: 'password')
+
+      authenticated_user = User.authenticate_with_credentials('test@example.com', 'wrong_password')
+      expect(authenticated_user).to be_nil
+    end
+
+    it 'returns nil if authentication fails (incorrect email)' do
+      User.create(first_name:"David", last_name: "Sooley", email: 'test@example.com', password: 'password', password_confirmation: 'password')
+
+      authenticated_user = User.authenticate_with_credentials('wrong_email@example.com', 'password')
+      expect(authenticated_user).to be_nil
+    end
+
+    it 'ignores leading/trailing whitespace in the email' do
+      User.create(first_name:"David", last_name: "Sooley", email: 'test@example.com', password: 'password', password_confirmation: 'password')
+
+      authenticated_user = User.authenticate_with_credentials('  test@example.com  ', 'password')
+      expect(authenticated_user).to be_a(User)
+    end
+
+    it 'ignores case sensitivity in the email' do
+      User.create(first_name:"David", last_name: "Sooley", email: 'test@example.com', password: 'password', password_confirmation: 'password')
+
+      authenticated_user = User.authenticate_with_credentials('TEST@example.com', 'password')
+      expect(authenticated_user).to be_a(User)
+    end
+  end
 end
